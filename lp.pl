@@ -48,8 +48,20 @@ sum-up-numbers-general([X|Y],N) :-  %recursive case for a non-empty list.
 find-min([X], X).
 
 find-min([X1,X2|Y], N):-
-	X1 < X2,
-	N is X1,
+	\+(nuumber(X1)),
+	\+(nuumber(X2)),
+	find-min([X2|Y], N).
+
+find-min([X1,X2|Y], N):-
+	number(X1),
+	number(X2),
+	X1 > X2,
+	find-min([X2|Y], N).
+
+find-min([X1,X2|Y], N):-
+	number(X1),
+	number(X2),
+	X1 =< X2,
 	find-min([X1|Y], N).
 	
 
