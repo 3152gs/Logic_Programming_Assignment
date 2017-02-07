@@ -41,16 +41,26 @@ sum-up-numbers-general([X|Y],N) :-  %recursive case for a non-empty list.
 								N is X + N1. 
 
 
-%min-above-min([], [], [])	:- %recursive case for none-empty list.
+%min-above-min([], [], [])	:- %recursive case for non-empty list.
 
 %min-above-min
 
 find-min([X], X).
 
 find-min([X1,X2|Y], N):-
-	\+(nuumber(X1)),
-	\+(nuumber(X2)),
+	\+(number(X1)),
+	number(X2),
 	find-min([X2|Y], N).
+
+find-min([X1,X2|Y], N):-
+	number(X1),
+	\+(number(X2)),
+	find-min([X1|Y], N).
+
+find-min([X1,X2|Y], N):-
+	\+(number(X1)),
+	\+(number(X2)),
+	find-min(Y, N).
 
 find-min([X1,X2|Y], N):-
 	number(X1),
