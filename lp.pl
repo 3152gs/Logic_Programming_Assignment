@@ -39,3 +39,22 @@ sum-up-numbers-general([X|Y],N) :-  %recursive case for a non-empty list.
 								number(X),       %check if the item is a number
 								sum-up-numbers-general(Y, N1),              
 								N is X + N1. 
+
+
+%min-above-min([], [], [])	:- %recursive case for none-empty list.
+
+%min-above-min
+
+find-min([X], X).
+
+find-min([X|Y], N):-
+	find-min(Y, N1),
+	N1 < X,
+	N is N1.
+
+
+find-min([X|Y], N):-
+	%find-min(Y, N1),
+	X < N1,
+	find-min(Y, N1).
+
