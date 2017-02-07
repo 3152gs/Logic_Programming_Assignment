@@ -50,6 +50,6 @@ find-min([X], X).
 find-min([X1,X2|Y], N):-
 	X1 < X2,
 	N is X1,
-	find-min(Y, N).
+	find-min([X1|Y], N).
 	
 
