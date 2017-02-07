@@ -30,6 +30,7 @@ sum-up-numbers-general([X|Y],N) :-	%checks if the item is a list, if a list simp
 									\+(number(X)),
 									is_list(X),  
 									sum-up-numbers-general(X, N1),
+									sum-up-numbers-general(Y, N1),
 									N is X + N1.
 									
 
