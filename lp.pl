@@ -29,9 +29,9 @@ sum-up-numbers-general([X|Y],N) :-	%checks if the item is a number, if not a num
 sum-up-numbers-general([X|Y],N) :-	%checks if the item is a list, if a list simply make recursive call passing the list to the function
 									\+(number(X)),
 									is_list(X),  
-									sum-up-numbers-general(X, N1),
+									sum-up-numbers-general(X, N2),
 									sum-up-numbers-general(Y, N1),
-									N is X + N1.
+									N is N2 + N1.
 									
 
 sum-up-numbers-general([X|Y],N) :-  %recursive case for a non-empty list.
