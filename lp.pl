@@ -96,15 +96,27 @@ min-above-min(L1, L2, Min):-
 
 common-unique-elements([],[],[]).
 
+
+
 common-unique-elements([X|Y], [W|Z] , L):-
 	X == W,
 	common-unique-elements(Y, Z , L1),
 	append(L1, [X], L).
 
-common-unique-elements([X|Y], [W|Z] , L):-
-	\+(X == W),
+common-unique-elements([X|Y], Z , L):-
+	member(X, Z),
 	common-unique-elements(Y, Z , L1),
-	append(L1, [], L).	
+	append(L1, [X], L).
+
+common-unique-elements(Y, [W|Z] , L):-
+	member(W,Y),
+	common-unique-elements(Y, Z , L1),
+	append(L1, [W], L).
+
+%common-unique-elements([X|Y], [W|Z] , L):-
+%	\+(X == W),
+%	common-unique-elements(Y, Z , L1),
+%	append(L1, [], L).	
 
 
 
