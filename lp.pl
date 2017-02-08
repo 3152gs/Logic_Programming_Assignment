@@ -95,17 +95,14 @@ min-above-min(L1, L2, Min):-
 % Number 4: 
 % Helper Function to convert nested list to a simple list.
 
-% Base Case 
-make-simple([], []).
+make-simple([], []).    % Base Case 
 
-% If element is not a nested list
-make-simple([First_G1|Rest_G1], S1):-
+make-simple([First_G1|Rest_G1], S1):-   % If element is not a nested list
 	\+(is_list(First_G1)),
 	make-simple(Rest_G1, S11),
 	append([First_G1], S11, S1).
 
-% If element is a nested list.
-make-simple([First_G1|Rest_G1], S1):-
+make-simple([First_G1|Rest_G1], S1):-   % If element is a nested list.
 	is_list(First_G1),
 	make-simple(First_G1, S12),
 	make-simple(Rest_G1, S11),
@@ -116,9 +113,9 @@ common-unique-elements([],Z,[]).
 common-unique-elements(W, Z , L):-
 	make-simple(W, Simple1),
 	make-simple(Z, Simple2),
-	W = [X|Y],
-	member(X, Z),
-	common-unique-elements(Y, Z , L1),
+	Simple1 = [X|Y],
+	member(X, Simple2),
+	common-unique-elements(Y, Simple2 , L1),
 	append([X], L1, L).
 
 
