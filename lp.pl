@@ -93,37 +93,23 @@ min-above-min(L1, L2, Min):-
 
 
 % Number 4: 
+make-simple([], []).
+
+make-simple([First_G1|Rest_G1], S1):-
+	\+(is_list(First_G1)),
+	make-simple(Rest_G1, S11),
+	append(S11, [First_G1], S1).
 
 common-unique-elements([],Z,[]).
 
-%common-unique-elements([X|Y], [W|Z] , L):-
-%	X == W,
-%	common-unique-elements(Y, Z , L1),
-%	append(L1, [X], L).
-
-
 common-unique-elements(W, Z , L):-
-	make-simple([X|Y], Simple1),
-	make-simple(Z, Simple2),
-
+	%make-simple(W, Simple1),
+	%make-simple(Z, Simple2),
+	W = [X|Y],
 	member(X, Z),
 	common-unique-elements(Y, Z , L1),
-	append(L1, [X], L).
+	append([X], L1, L).
 
-%common-unique-elements([X|Y], Z , L):-
-%	not(member(X, Z)),
-%	common-unique-elements(Y, Z , L1),
-%	append(L1, [X], L).
-
-%common-unique-elements(Y, [W|Z] , L):-
-%	member(W,Y),
-%	common-unique-elements(Y, Z , L1),
-%	append(L1, [W], L).
-
-%common-unique-elements([X|Y], [W|Z] , L):-
-%	\+(X == W),
-%	common-unique-elements(Y, Z , L1),
-%	append(L1, [], L).	
 
 
 
