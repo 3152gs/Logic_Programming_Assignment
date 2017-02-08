@@ -1,3 +1,5 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % sum-up-numbers-simple.
 % Function to find the sum of the numbers in a simple list.
 
@@ -14,6 +16,7 @@ sum-up-numbers-simple([X|Y],N) :-  %recursive case for a non-empty list.
 								sum-up-numbers-simple(Y, N1),              
 								N is X + N1. 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % sum-up-numbers-general.
 % Function to find the sum of the numbers in a general list.
@@ -40,10 +43,11 @@ sum-up-numbers-general([X|Y],N) :-  %recursive case for a non-empty list.
 								sum-up-numbers-general(Y, N1),              
 								N is X + N1. 
 
-
-%min-above-min([], [], [])	:- %recursive case for non-empty list.
-
-%min-above-min
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Number 3.
+% Idea: Find minimum of both list
+%		If min(L1) > min(L2), True
+%		Else , delete min from L1 and find new min and repeat the process
 
 find-min([X], X). %base case
 
@@ -89,8 +93,19 @@ min-above-min(L1, L2, Min):-
 	Min1 > Min2,
 	Min is Min1.
 
+min-above-min(L1, L2, Min):-
+	find-min(L1, Min1),
+	find-min(L2, Min2),
+	\+(Min1 > Min2),
+	deleteMin(Min1, L1, NewL),
+	min-above-min(L1, L2, Min).
 
-% Number 4: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Number 4:
+% Idea : Convert all general list to simple list
+%		Find common elements from those two lists
+ 
 % Helper Function to convert nested list to a simple list.
 
 make-simple([], []).    % Base Case 
@@ -124,4 +139,4 @@ common-getter([X|Y], Z , L):-  % If an item is not a member do not append anythi
 	common-getter(Y, Z , L).
 	
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
