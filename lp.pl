@@ -79,8 +79,7 @@ find-min([X1,X2|Y], N):-
 delete-min(E, [E], []).
 
 %if the item is the first element of the list (not single) 
-delete-min(E, [X|Rest], Final):-
-	E = X,
+delete-min(E, [E|Rest], Final):-
 	delete-min(E, Rest, Final).
 	
 
@@ -92,6 +91,14 @@ min-above-min(L1, L2, Min):-
 	Min1 > Min2,
 	Min is Min1.
 
+
+% Number 4: 
+
+common-unique-elements([],[],[]).
+
+common-unique-elements([X|Y], [X|Z] , L):-
+	append([X], [], L),
+	common-unique-elements(Y, Z , L).
 
 
 
