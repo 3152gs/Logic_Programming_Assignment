@@ -97,15 +97,15 @@ min-above-min(L1, L2, Min):-
 	find-min(L1, Min1),
 	find-min(L2, Min2),
 	\+(Min1 > Min2),
-	deleteMin(Min1, L1, NewL),
-	min-above-min(L1, L2, Min).
+	delete-min(Min1, L1, NewL),
+	min-above-min(NewL, L2, Min).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Number 4:
 % Idea : Convert all general list to simple list
 %		Find common elements from those two lists
- 
+
 % Helper Function to convert nested list to a simple list.
 
 make-simple([], []).    % Base Case 
