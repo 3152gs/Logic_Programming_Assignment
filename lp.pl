@@ -75,12 +75,10 @@ find-min([X1,X2|Y], N):-
 	find-min([X1|Y], N).
 
 % delete-min : function to delete an item from the list
-%if the item is the first element of the single item list, null is the final list.
-delete-min(E, [E], []).
 
-%if the item is the first element of the list (list has more than one item) 
-delete-min(E, [E|Rest], Final):-
-	delete-min(E, Rest, Final).
+delete-min(E,[],[]). %base case
+delete-min(E,[X|Rest],Result) :- X=E, delete-min(E,Rest,Result). % if the element to be deleted is equal to the first item
+delete-min(E,[X|Rest],[X|Result]) :- delete-min(E,Rest,Result). % Else 
 	
 
 min-above-min([],[],[]).
@@ -111,17 +109,17 @@ make-simple([First_G1|Rest_G1], S1):-   % If element is a nested list.
 common-unique-elements(A, B, C):-
 	make-simple(A, Simple1),    % Convert a nested list into a simple list
 	make-simple(B, Simple2),    
-	common-getter(Simple1, Simple2 , C).   
+	common-getter(Simple1, Simple2 , C).    % Call the predicate to get common of the lists
 	
 
-common-getter([],_,[]).
+common-getter([],_,[]).    % Base Case : if a list is empty NULL is common
 
-common-getter([X|Y], Z , L):-
+common-getter([X|Y], Z , L):- % If an item is a member of second list append it
 	member(X, Z),
 	common-getter(Y, Z , L1),
 	append([X], L1, L).
 
-common-getter([X|Y], Z , L):-
+common-getter([X|Y], Z , L):-  % If an item is not a member do not append anything.
 	not(member(X, Z)),
 	common-getter(Y, Z , L).
 	
