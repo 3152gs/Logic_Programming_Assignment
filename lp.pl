@@ -78,7 +78,7 @@ find-min([X1,X2|Y], N):-
 %if the item is the first element of the single item list, null is the final list.
 delete-min(E, [E], []).
 
-%if the item is the first element of the list (not single) 
+%if the item is the first element of the list (list has more than one item) 
 delete-min(E, [E|Rest], Final):-
 	delete-min(E, Rest, Final).
 	
@@ -94,24 +94,31 @@ min-above-min(L1, L2, Min):-
 
 % Number 4: 
 
-common-unique-elements([],[],[]).
+common-unique-elements([],Z,[]).
+
+%common-unique-elements([X|Y], [W|Z] , L):-
+%	X == W,
+%	common-unique-elements(Y, Z , L1),
+%	append(L1, [X], L).
 
 
+common-unique-elements(W, Z , L):-
+	make-simple([X|Y], Simple1),
+	make-simple(Z, Simple2),
 
-common-unique-elements([X|Y], [W|Z] , L):-
-	X == W,
-	common-unique-elements(Y, Z , L1),
-	append(L1, [X], L).
-
-common-unique-elements([X|Y], Z , L):-
 	member(X, Z),
 	common-unique-elements(Y, Z , L1),
 	append(L1, [X], L).
 
-common-unique-elements(Y, [W|Z] , L):-
-	member(W,Y),
-	common-unique-elements(Y, Z , L1),
-	append(L1, [W], L).
+%common-unique-elements([X|Y], Z , L):-
+%	not(member(X, Z)),
+%	common-unique-elements(Y, Z , L1),
+%	append(L1, [X], L).
+
+%common-unique-elements(Y, [W|Z] , L):-
+%	member(W,Y),
+%	common-unique-elements(Y, Z , L1),
+%	append(L1, [W], L).
 
 %common-unique-elements([X|Y], [W|Z] , L):-
 %	\+(X == W),
