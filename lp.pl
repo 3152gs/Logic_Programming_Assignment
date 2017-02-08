@@ -108,14 +108,16 @@ make-simple([First_G1|Rest_G1], S1):-   % If element is a nested list.
 	make-simple(Rest_G1, S11),
 	append(S12, S11, S1).
 
-common-unique-elements([],Z,[]).
-
-common-unique-elements(W, Z , L):-
+simple-list-getter(A, B, C):-
 	make-simple(W, Simple1),
 	make-simple(Z, Simple2),
-	Simple1 = [X|Y],
-	member(X, Simple2),
-	common-unique-elements(Y, Simple2 , L1),
+	common-unique-elements(Simple1, Simple2 , L).
+
+common-unique-elements([],Z,[]).
+
+common-unique-elements([X|Y], Z , L):-
+	member(X, Z),
+	common-unique-elements(Y, Z , L1),
 	append([X], L1, L).
 
 
