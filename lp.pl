@@ -45,33 +45,54 @@ sum-up-numbers-general([X|Y],N) :-  %recursive case for a non-empty list.
 
 %min-above-min
 
-find-min([X], X).
+find-min([X], X). %base case
 
-find-min([X1,X2|Y], N):-
+find-min([X1,X2|Y], N):-    % if second element is a number but not the first one
 	\+(number(X1)),
 	number(X2),
 	find-min([X2|Y], N).
 
-find-min([X1,X2|Y], N):-
+find-min([X1,X2|Y], N):-   %  if first element is a number but not the second one
 	number(X1),
 	\+(number(X2)),
 	find-min([X1|Y], N).
 
-find-min([X1,X2|Y], N):-
+find-min([X1,X2|Y], N):-    % if both the element are not numbers
 	\+(number(X1)),
 	\+(number(X2)),
 	find-min(Y, N).
 
-find-min([X1,X2|Y], N):-
+find-min([X1,X2|Y], N):-    % if bothe first and second element are numbers
 	number(X1),
 	number(X2),
-	X1 > X2,
+	X1 > X2,            % check if the second item is smaller than the first one
 	find-min([X2|Y], N).
 
 find-min([X1,X2|Y], N):-
 	number(X1),
 	number(X2),
-	X1 =< X2,
+	X1 =< X2,         %check if the first element is the smaller one
 	find-min([X1|Y], N).
+
+% delete-min : function to delete an item from the list
+%if the item is the first element of the single item list, null is the final list.
+delete-min(E, [E], []).
+
+%if the item is the first element of the list (not single) 
+delete-min(E, [X|Rest], Final):-
+	E = X,
+	delete-min(E, Rest, Final).
 	
+
+min-above-min([],[],[]).
+
+min-above-min(L1, L2, Min):-
+	find-min(L1, Min1),
+	find-min(L2, Min2),
+	Min1 > Min2,
+	Min is Min1.
+
+
+
+
 
